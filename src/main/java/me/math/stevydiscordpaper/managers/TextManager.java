@@ -5,11 +5,11 @@ import me.math.stevydiscordpaper.Main;
 import java.util.HashMap;
 
 public class TextManager {
-    private Main main;
+    private final Main plugin;
     private final HashMap<String, String> locales;
 
     public TextManager(Main plugin) {
-        this.main = plugin;
+        this.plugin = plugin;
         this.locales = new HashMap<>();
     }
 

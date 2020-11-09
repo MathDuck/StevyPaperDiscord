@@ -5,10 +5,10 @@ import me.math.stevydiscordpaper.managers.paper.listeners.PlayerJoinListener;
 import org.bukkit.plugin.PluginManager;
 
 public class EventManager {
-    final private Main main;
+    private final Main plugin;
 
     public EventManager(Main plugin) {
-        this.main = plugin;
+        this.plugin = plugin;
     }
 
     public void init() {
@@ -16,9 +16,9 @@ public class EventManager {
     }
 
     private void registerEvents() {
-        PluginManager pm = main.getServer().getPluginManager();
+        PluginManager pm = plugin.getServer().getPluginManager();
 
-        pm.registerEvents(new PlayerJoinListener(main), main);
+        pm.registerEvents(new PlayerJoinListener(plugin), plugin);
         /*pm.registerEvents(new PlayerQuitListener(this), this);
         pm.registerEvents(new PlayerChatListener(this), this);
         pm.registerEvents(new PlayerDeathListener(this), this);

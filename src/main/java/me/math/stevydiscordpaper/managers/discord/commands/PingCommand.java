@@ -6,15 +6,15 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 public class PingCommand implements MessageCreateListener {
-    private Main main;
+    private final Main plugin;
 
     public PingCommand(Main main) {
-        this.main = main;
+        this.plugin = main;
     }
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        Bukkit.getScheduler().runTask(main, () -> {
+        Bukkit.getScheduler().runTask(plugin, () -> {
             if (event.getMessageContent().equalsIgnoreCase(Main.getConfigManager().getDiscordPrefix() + "ping")) {
                 event.deleteMessage();
                 event.getChannel().sendMessage("```Pong héhé!```");

@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ConfigManager {
-    private final Main main;
+    private final Main plugin;
     private Configuration config;
 
     private String discordToken, discordToMCTemplateMessage, MCToDiscordTemplateMessage, discordMessageOnUserLoginMessage, discordMessageOnUserLogoutMessage, discordPrefix, serverHost;
@@ -18,12 +18,12 @@ public class ConfigManager {
     private boolean logChannelEnabled, discordMessageOnUserLogin, discordMessageOnUserLogout, useEmbedDiscordMessage, isDebugging, showEmojisName;
 
     public ConfigManager(Main plugin) {
-        this.main = plugin;
+        this.plugin = plugin;
     }
 
     public void init() {
         getDefaultConfig();
-        main.getLogger().info("Loading configuration...");
+        plugin.getLogger().info("Loading configuration...");
         loadConfig(config);
     }
 
@@ -32,7 +32,7 @@ public class ConfigManager {
     }
 
     public void getDefaultConfig() {
-        String filePath = main.getDataFolder() + "/config.yml";
+        String filePath = plugin.getDataFolder() + "/config.yml";
         File file = new File(filePath);
         try {
             if (!file.exists()) {
@@ -84,7 +84,7 @@ public class ConfigManager {
     }
 
     public void saveConfigOnQuit() {
-        String filePath = main.getDataFolder() + "/config.yml";
+        String filePath = plugin.getDataFolder() + "/config.yml";
         File file = new File(filePath);
         try {
             if (file.exists()) {

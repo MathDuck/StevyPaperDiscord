@@ -17,28 +17,28 @@ import org.javacord.api.entity.user.User;
 import java.awt.*;
 
 public class DiscordManager {
-    private Main main;
+    private final Main plugin;
     private static DiscordApi api = null;
     boolean isTokenHere = true;
 
     public DiscordManager(Main plugin) {
-        this.main = plugin;
+        this.plugin = plugin;
     }
 
     public void init() {
         try {
-            main.getLogger().info("Connecting Discord bot...");
+            plugin.getLogger().info("Connecting Discord bot...");
 
             String discordToken = Main.getConfigManager().getDiscordToken();
             if (discordToken.equalsIgnoreCase("none") || discordToken.isBlank()) {
-                main.getLogger().warning("Discord Token isn't configured. Please add it to the config file.");
+                plugin.getLogger().warning("Discord Token isn't configured. Please add it to the config file.");
                 isTokenHere = false;
             }
 
             if (isTokenHere) {
                 api = new DiscordApiBuilder().setToken(discordToken).login().join();
 
-                api.addMessageCreateListener(new PingCommand(main));
+                api.addMessageCreateListener(new PingCommand(plugin));
                 /*api.addMessageCreateListener(new InfosCommand(this));
                 api.addMessageCreateListener(new OnlineCommand(this));
                 api.addMessageCreateListener(new TPSCommand(this));
@@ -48,24 +48,25 @@ public class DiscordManager {
 
                 User user = api.getYourself();
                 if (user != null) {
-                    main.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
+                    plugin.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
                     sendLogMessageToDiscord(user.getName() + " is ready!", true, Color.CYAN);
                     return;
                 }
                 return;
             } else {
-                main.getLogger().warning("Discord Token is not configured in option file.");
+                plugin.getLogger().warning("Discord Token is not configured in option file.");
             }
 
         } catch (Exception e) {
-            main.getLogger().warning("Problem when loading Discord Bot => " + e.getMessage());
+            plugin.getLogger().warning("Problem when loading Discord Bot => " + e.getMessage());
             return;
         }
 
-        sendLogMessageToDiscord("Le serveur (" + Main.getConfigManager().getServerHost() + ") est en ligne.", true, Color.GREEN);
+        //TODO
+        //sendLogMessageToDiscord("Le serveur (" + Main.getConfigManager().getServerHost() + ") est en ligne.", true, Color.GREEN);
     }
 
-    public static void sendListenerMessageToDiscord(Player player, String structure, Color color) {
+    public void sendListenerMessageToDiscord(Player player, String structure, Color color) {
         long defaultChannelId = Main.getConfigManager().getDefaultChannelId();
         if (defaultChannelId == 0)
             return;
@@ -134,7 +135,7 @@ public class DiscordManager {
         }
     }
 
-    public static void forceUpdate() {
+    public void forceUpdate() {
         updateDiscordInfos();
     }
 
@@ -146,6 +147,13 @@ public class DiscordManager {
     }
 
     public void dispose() {
-        sendLogMessageToDiscord("Le serveur est maintenant hors-ligne.", true, Color.RED);
+        if (api == null)
+            return;
+        api.unsetActivity();
+        api.disconnect();
+        api = null;
+
+        //TODO
+        //sendLogMessageToDiscord("Le serveur est maintenant hors-ligne.", true, Color.RED);
     }
 }
