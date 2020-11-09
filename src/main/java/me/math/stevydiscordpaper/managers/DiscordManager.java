@@ -15,6 +15,7 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class DiscordManager {
     private final Main plugin;
@@ -73,7 +74,7 @@ public class DiscordManager {
         if (defaultChannelId == 0)
             return;
 
-        TextChannel channel = api.getTextChannelById(defaultChannelId).get();
+        Optional<TextChannel> channel = api.getTextChannelById(defaultChannelId);
 
         String toSend = structure.replaceAll("%name%", player.getName());
         if (Main.getConfigManager().isUsingEmbedDiscordMessage()) {
@@ -82,9 +83,14 @@ public class DiscordManager {
                     .setDescription(toSend)
                     .setColor(color)
                     .setThumbnail("https://minotar.net/avatar/" + player.getUniqueId().toString().replace("-", "") + "/60");
-            channel.sendMessage(embed);
+
+            channel.ifPresent(textChannel -> {
+                textChannel.sendMessage(embed);
+            });
         } else {
-            channel.sendMessage("[" + Util.completeDate() + "] " + toSend);
+            channel.ifPresent(textChannel -> {
+                textChannel.sendMessage("[" + Util.completeDate() + "] " + toSend);
+            });
         }
     }
 
@@ -93,11 +99,15 @@ public class DiscordManager {
         if (chatChannelId == 0)
             return;
 
-        TextChannel channel = api.getTextChannelById(chatChannelId).get();
+        Optional<TextChannel> channel = api.getTextChannelById(chatChannelId);
 
         String toSend = Main.getConfigManager().getMCToDiscordTemplateMessage().replaceAll("%name%", name);
         toSend = toSend.replaceAll("%message%", message);
-        channel.sendMessage("*[" + Util.justClock() + "]*  " + toSend);
+        String finalToSend = toSend;
+
+        channel.ifPresent(textChannel -> {
+            textChannel.sendMessage("*[" + Util.justClock() + "]*  " + finalToSend);
+        });
     }
 
     public void sendCommandMessageToDiscord(String message) {
@@ -108,9 +118,11 @@ public class DiscordManager {
         if (logChannelId == 0)
             return;
 
-        TextChannel channel = api.getTextChannelById(logChannelId).get();
+        Optional<TextChannel> channel = api.getTextChannelById(logChannelId);
 
-        channel.sendMessage("```[" + Util.completeDate() + "] " + message + "```");
+        channel.ifPresent(textChannel -> {
+            textChannel.sendMessage("```[" + Util.completeDate() + "] " + message + "```");
+        });
     }
 
     public void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
@@ -121,16 +133,21 @@ public class DiscordManager {
         if (logChannelId == 0)
             return;
 
-        TextChannel channel = api.getTextChannelById(logChannelId).get();
+        Optional<TextChannel> channel = api.getTextChannelById(logChannelId);
 
         if (useEmbed && Main.getConfigManager().isUsingEmbedDiscordMessage()) {
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle("[" + Util.completeDate() + "]")
                     .setDescription(message)
                     .setColor(color);
-            channel.sendMessage(embed);
-        } else
-            channel.sendMessage("[" + Util.completeDate() + "] " + message);
+            channel.ifPresent(textChannel -> {
+                textChannel.sendMessage(embed);
+            });
+        } else {
+            channel.ifPresent(textChannel -> {
+                textChannel.sendMessage("[" + Util.completeDate() + "] " + message);
+            });
+        }
     }
 
     public void sendMessageToMinecraft(String name, String message) {

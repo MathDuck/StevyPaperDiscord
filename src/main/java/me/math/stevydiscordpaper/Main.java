@@ -37,8 +37,6 @@ public final class Main extends JavaPlugin {
         eventManager.dispose();
         textManager.dispose();
         discordManager.dispose();
-
-        getLogger().info("Fermeture de l'application...");
     }
 
     public static ConfigManager getConfigManager() {
@@ -49,7 +47,7 @@ public final class Main extends JavaPlugin {
         return discordManager;
     }
 
-    public static TextManager getAdvancementStringManager() {
+    public static TextManager getTextManager() {
         return textManager;
     }
 }
