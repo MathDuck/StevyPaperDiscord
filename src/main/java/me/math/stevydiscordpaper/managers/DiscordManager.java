@@ -1,19 +1,151 @@
 package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
+import me.math.stevydiscordpaper.managers.discord.commands.PingCommand;
+import me.math.stevydiscordpaper.utils.Util;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.javacord.api.DiscordApi;
+import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.activity.ActivityType;
+import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.entity.user.User;
+
+import java.awt.*;
 
 public class DiscordManager {
     private Main main;
+    private static DiscordApi api = null;
+    boolean isTokenHere = true;
 
     public DiscordManager(Main plugin) {
         this.main = plugin;
     }
 
     public void init() {
-        //sendLogMessageToDiscord("Le serveur (" + getConfigManager().getServerHost() + ") est en ligne.", true, Color.GREEN);
+        try {
+            main.getLogger().info("Connecting Discord bot...");
+
+            String discordToken = Main.getConfigManager().getDiscordToken();
+            if (discordToken.equalsIgnoreCase("none") || discordToken.isBlank()) {
+                main.getLogger().warning("Discord Token isn't configured. Please add it to the config file.");
+                isTokenHere = false;
+            }
+
+            if (isTokenHere) {
+                api = new DiscordApiBuilder().setToken(discordToken).login().join();
+
+                api.addMessageCreateListener(new PingCommand(main));
+                /*api.addMessageCreateListener(new InfosCommand(this));
+                api.addMessageCreateListener(new OnlineCommand(this));
+                api.addMessageCreateListener(new TPSCommand(this));
+                api.addMessageCreateListener(new DiscordCommand(this));
+                api.addMessageCreateListener(new WhitelistCommand(this));
+                api.addMessageCreateListener(new DiscordMessageListener());*/
+
+                User user = api.getYourself();
+                if (user != null) {
+                    main.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
+                    sendLogMessageToDiscord(user.getName() + " is ready!", true, Color.CYAN);
+                    return;
+                }
+                return;
+            } else {
+                main.getLogger().warning("Discord Token is not configured in option file.");
+            }
+
+        } catch (Exception e) {
+            main.getLogger().warning("Problem when loading Discord Bot => " + e.getMessage());
+            return;
+        }
+
+        sendLogMessageToDiscord("Le serveur (" + Main.getConfigManager().getServerHost() + ") est en ligne.", true, Color.GREEN);
+    }
+
+    public static void sendListenerMessageToDiscord(Player player, String structure, Color color) {
+        long defaultChannelId = Main.getConfigManager().getDefaultChannelId();
+        if (defaultChannelId == 0)
+            return;
+
+        TextChannel channel = api.getTextChannelById(defaultChannelId).get();
+
+        String toSend = structure.replaceAll("%name%", player.getName());
+        if (Main.getConfigManager().isUsingEmbedDiscordMessage()) {
+            EmbedBuilder embed = new EmbedBuilder()
+                    .setTitle("[" + Util.completeDate() + "]")
+                    .setDescription(toSend)
+                    .setColor(color)
+                    .setThumbnail("https://minotar.net/avatar/" + player.getUniqueId().toString().replace("-", "") + "/60");
+            channel.sendMessage(embed);
+        } else {
+            channel.sendMessage("[" + Util.completeDate() + "] " + toSend);
+        }
+    }
+
+    public static void sendMessageToDiscord(String name, String message) {
+        long chatChannelId = Main.getConfigManager().getChatChannelId();
+        if (chatChannelId == 0)
+            return;
+
+        TextChannel channel = api.getTextChannelById(chatChannelId).get();
+
+        String toSend = Main.getConfigManager().getMCToDiscordTemplateMessage().replaceAll("%name%", name);
+        toSend = toSend.replaceAll("%message%", message);
+        channel.sendMessage("*[" + Util.justClock() + "]*  " + toSend);
+    }
+
+    public static void sendCommandMessageToDiscord(String message) {
+        long logChannelId = Main.getConfigManager().getLogChannelId();
+        if (logChannelId == 0)
+            return;
+
+        TextChannel channel = api.getTextChannelById(logChannelId).get();
+
+        channel.sendMessage("```[" + Util.completeDate() + "] " + message + "```");
+    }
+
+    public static void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
+        long logChannelId = Main.getConfigManager().getLogChannelId();
+        if (logChannelId == 0)
+            return;
+
+        TextChannel channel = api.getTextChannelById(logChannelId).get();
+
+        if (useEmbed && Main.getConfigManager().isUsingEmbedDiscordMessage()) {
+            EmbedBuilder embed = new EmbedBuilder()
+                    .setTitle("[" + Util.completeDate() + "]")
+                    .setDescription(message)
+                    .setColor(color);
+            channel.sendMessage(embed);
+        } else
+            channel.sendMessage("[" + Util.completeDate() + "] " + message);
+    }
+
+    public static void sendMessageToMinecraft(String name, String message) {
+        message = message.replaceAll("\u00a7", "");
+        String toSend = Main.getConfigManager().getDiscordToMCTemplateMessage().replaceAll("&", "\u00a7");
+        toSend = toSend.replaceAll("%name%", name);
+        toSend = toSend.replaceAll("%message%", message);
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.sendMessage((BaseComponent) new TextComponent(toSend));
+        }
+    }
+
+    public static void forceUpdate() {
+        updateDiscordInfos();
+    }
+
+    private static void updateDiscordInfos() {
+        if (api != null) {
+            String Message = "Connecté(s): " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + " - " + Bukkit.getBukkitVersion().split("-")[0];
+            api.updateActivity(ActivityType.PLAYING, Message);
+        }
     }
 
     public void dispose() {
-        //sendLogMessageToDiscord("Le serveur est maintenant hors-ligne.", true, Color.RED);
+        sendLogMessageToDiscord("Le serveur est maintenant hors-ligne.", true, Color.RED);
     }
 }
