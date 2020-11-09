@@ -19,8 +19,4 @@ public class CommandManager {
         plugin.getCommand("reloadconfig").setExecutor(new ReloadConfigCommand(plugin));
         plugin.getCommand("discord").setExecutor(new ReloadDiscordCommand(plugin));
     }
-
-    public void dispose() {
-
-    }
 }

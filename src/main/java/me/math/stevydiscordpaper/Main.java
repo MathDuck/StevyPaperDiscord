@@ -35,7 +35,6 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         configManager.dispose();
         eventManager.dispose();
-        commandManager.dispose();
         textManager.dispose();
         discordManager.dispose();
 

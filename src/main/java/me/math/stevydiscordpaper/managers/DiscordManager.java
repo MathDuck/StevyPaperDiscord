@@ -31,7 +31,6 @@ public class DiscordManager {
 
             String discordToken = Main.getConfigManager().getDiscordToken();
             if (discordToken.equalsIgnoreCase("none") || discordToken.isBlank()) {
-                plugin.getLogger().warning("Discord Token isn't configured. Please add it to the config file.");
                 isTokenHere = false;
             }
 
@@ -67,6 +66,9 @@ public class DiscordManager {
     }
 
     public void sendListenerMessageToDiscord(Player player, String structure, Color color) {
+        if (!isTokenHere)
+            return;
+
         long defaultChannelId = Main.getConfigManager().getDefaultChannelId();
         if (defaultChannelId == 0)
             return;
@@ -98,7 +100,10 @@ public class DiscordManager {
         channel.sendMessage("*[" + Util.justClock() + "]*  " + toSend);
     }
 
-    public static void sendCommandMessageToDiscord(String message) {
+    public void sendCommandMessageToDiscord(String message) {
+        if (!isTokenHere)
+            return;
+
         long logChannelId = Main.getConfigManager().getLogChannelId();
         if (logChannelId == 0)
             return;
@@ -108,7 +113,10 @@ public class DiscordManager {
         channel.sendMessage("```[" + Util.completeDate() + "] " + message + "```");
     }
 
-    public static void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
+    public void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
+        if (!isTokenHere)
+            return;
+
         long logChannelId = Main.getConfigManager().getLogChannelId();
         if (logChannelId == 0)
             return;
@@ -125,7 +133,10 @@ public class DiscordManager {
             channel.sendMessage("[" + Util.completeDate() + "] " + message);
     }
 
-    public static void sendMessageToMinecraft(String name, String message) {
+    public void sendMessageToMinecraft(String name, String message) {
+        if (!isTokenHere)
+            return;
+
         message = message.replaceAll("\u00a7", "");
         String toSend = Main.getConfigManager().getDiscordToMCTemplateMessage().replaceAll("&", "\u00a7");
         toSend = toSend.replaceAll("%name%", name);
@@ -136,6 +147,9 @@ public class DiscordManager {
     }
 
     public void forceUpdate() {
+        if (!isTokenHere)
+            return;
+
         updateDiscordInfos();
     }
 
@@ -147,8 +161,9 @@ public class DiscordManager {
     }
 
     public void dispose() {
-        if (api == null)
+        if (api == null || !isTokenHere)
             return;
+
         api.unsetActivity();
         api.disconnect();
         api = null;
