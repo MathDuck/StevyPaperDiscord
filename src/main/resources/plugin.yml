@@ -1,0 +1,7 @@
+name: StevyDiscordPaper
+version: ${project.version}
+main: me.math.stevydiscordpaper.Main
+api-version: 1.16
+load: STARTUP
+authors: [ MathDuck ]
+description: Version Standalone de mon bot discord pour MC
