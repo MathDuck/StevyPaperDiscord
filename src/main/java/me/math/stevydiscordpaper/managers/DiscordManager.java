@@ -2,6 +2,7 @@ package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
 import me.math.stevydiscordpaper.managers.discord.commands.PingCommand;
+import me.math.stevydiscordpaper.utils.EmojiData;
 import me.math.stevydiscordpaper.utils.Util;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -91,7 +92,7 @@ public class DiscordManager {
         }
     }
 
-    public static void sendMessageToDiscord(String name, String message) {
+    public void sendMessageToDiscord(String name, String message) {
         long chatChannelId = Main.getConfigManager().getChatChannelId();
         if (chatChannelId == 0)
             return;
@@ -137,7 +138,7 @@ public class DiscordManager {
                     .setTitle("[" + Util.completeDate() + "]")
                     .setDescription(message)
                     .setColor(color);
-            
+
             channel.ifPresent(textChannel -> {
                 textChannel.sendMessage(embed);
             });
@@ -171,6 +172,20 @@ public class DiscordManager {
             String Message = "Connecté(s): " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + " - " + Bukkit.getBukkitVersion().split("-")[0];
             api.updateActivity(ActivityType.PLAYING, Message);
         }
+    }
+
+    public String formatDiscordMessage(String message) {
+        for (EmojiData emojiData : EmojiData.values()) {
+            message = message.replace(emojiData.unicode, emojiData.minecraftFormat);
+        }
+        return message;
+    }
+
+    public String formatMinecraftMessage(String message) {
+        for (EmojiData emojiData : EmojiData.values()) {
+            message = message.replace(emojiData.minecraftFormat, emojiData.discordFormat);
+        }
+        return message;
     }
 
     public void dispose() {

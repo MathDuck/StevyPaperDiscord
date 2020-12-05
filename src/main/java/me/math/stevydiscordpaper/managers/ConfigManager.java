@@ -17,6 +17,8 @@ public class ConfigManager {
     private long defaultChannelId, chatChannelId, logChannelId;
     private boolean logChannelEnabled, discordMessageOnUserLogin, discordMessageOnUserLogout, useEmbedDiscordMessage, isDebugging, showEmojisName;
 
+    private boolean showDeathCoordinatesOnDiscord;
+
     public ConfigManager(Main plugin) {
         this.plugin = plugin;
     }
@@ -55,6 +57,7 @@ public class ConfigManager {
                 config.set("use_embed_discord_message", true);
                 config.set("show_emojis_name", true);
                 config.set("debug_mode", false);
+                config.set("debug_mode", true);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             } else {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
@@ -81,6 +84,7 @@ public class ConfigManager {
         useEmbedDiscordMessage = conf.getBoolean("use_embed_discord_message");
         showEmojisName = conf.getBoolean("show_emojis_name");
         isDebugging = conf.getBoolean("debug_mode");
+        showDeathCoordinatesOnDiscord = conf.getBoolean("show_death_coordinates_on_discord");
     }
 
     public void saveConfigOnQuit() {
@@ -105,6 +109,7 @@ public class ConfigManager {
                 config.set("use_embed_discord_message", useEmbedDiscordMessage);
                 config.set("show_emojis_name", showEmojisName);
                 config.set("debug_mode", isDebugging);
+                config.set("show_death_coordinates_on_discord", showDeathCoordinatesOnDiscord);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             }
         } catch (IOException e) {
@@ -178,5 +183,9 @@ public class ConfigManager {
 
     public boolean isInDebugMode() {
         return isDebugging;
+    }
+
+    public boolean isShowDeathLocationOnDiscordEnabled() {
+        return showDeathCoordinatesOnDiscord;
     }
 }

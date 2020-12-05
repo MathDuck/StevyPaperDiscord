@@ -1,8 +1,7 @@
 package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
-import me.math.stevydiscordpaper.managers.paper.listeners.PlayerJoinListener;
-import me.math.stevydiscordpaper.managers.paper.listeners.PlayerQuitListener;
+import me.math.stevydiscordpaper.managers.paper.listeners.players.*;
 import org.bukkit.plugin.PluginManager;
 
 public class EventManager {
@@ -21,10 +20,14 @@ public class EventManager {
 
         pm.registerEvents(new PlayerJoinListener(plugin), plugin);
         pm.registerEvents(new PlayerQuitListener(plugin), plugin);
-        /*pm.registerEvents(new PlayerChatListener(this), this);
-        pm.registerEvents(new PlayerDeathListener(this), this);
-        pm.registerEvents(new PlayerSendCommandListener(this), this);
+        pm.registerEvents(new PlayerChatListener(plugin), plugin);
+        pm.registerEvents(new PlayerDeathListener(plugin), plugin);
+        pm.registerEvents(new PlayerSendCommandListener(plugin), plugin);
 
+        pm.registerEvents(new PlayerAdvancementDoneListener(plugin), plugin);
+
+
+        /*
         pm.registerEvents(new PlayerInteractEntityListener(this), this);
         pm.registerEvents(new PlayerInteractListener(this), this);
         pm.registerEvents(new PlayerBedEnterListener(this), this);
@@ -41,7 +44,6 @@ public class EventManager {
         pm.registerEvents(new PlayerBucketFillListener(this), this);
         pm.registerEvents(new PlayerBucketEmptyListener(this), this);
         pm.registerEvents(new PlayerMoveListener(this), this);
-        pm.registerEvents(new PlayerAdvancementDoneListener(this), this);
 
         pm.registerEvents(new FoodLevelChangeListener(this), this);
 

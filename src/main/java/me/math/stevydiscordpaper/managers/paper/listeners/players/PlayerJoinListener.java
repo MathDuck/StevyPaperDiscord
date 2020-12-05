@@ -1,4 +1,4 @@
-package me.math.stevydiscordpaper.managers.paper.listeners;
+package me.math.stevydiscordpaper.managers.paper.listeners.players;
 
 import me.math.stevydiscordpaper.Main;
 import org.bukkit.entity.Player;
