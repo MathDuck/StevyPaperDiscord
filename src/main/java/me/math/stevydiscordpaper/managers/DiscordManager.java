@@ -4,6 +4,7 @@ import me.math.stevydiscordpaper.Main;
 import me.math.stevydiscordpaper.managers.discord.commands.*;
 import me.math.stevydiscordpaper.managers.discord.listeners.DiscordMessageListener;
 import me.math.stevydiscordpaper.utils.EmojiData;
+import me.math.stevydiscordpaper.utils.TimeSpan;
 import me.math.stevydiscordpaper.utils.Util;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -18,6 +19,8 @@ import org.javacord.api.entity.user.User;
 
 import java.awt.*;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DiscordManager {
     private final Main plugin;
@@ -53,6 +56,9 @@ public class DiscordManager {
                     plugin.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
                     sendLogMessageToDiscord(user.getName() + " is ready!", true, Color.CYAN);
                 }
+
+                startDiscordCycle();
+
             } else {
                 plugin.getLogger().warning("Discord Token is not configured in option file.");
             }
@@ -156,6 +162,23 @@ public class DiscordManager {
         toSend = toSend.replaceAll("%name%", name);
         toSend = toSend.replaceAll("%message%", message);
         for (Player p : Bukkit.getOnlinePlayers()) p.sendMessage((BaseComponent) new TextComponent(toSend));
+    }
+
+    private void startDiscordCycle() {
+        int delay = 10000; // delay for 10 sec.
+        int period = 15000; // repeat every 15 sec.
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                long start = System.currentTimeMillis();
+                updateDiscordInfos();
+                TimeSpan span = new TimeSpan(start, System.currentTimeMillis());
+                if (span.toMilliseconds() > 2000) {
+                    plugin.getLogger().warning("Processing took: " + span.toMilliseconds() + "ms to execute.");
+                }
+            }
+        }, delay, period);
     }
 
     public void forceUpdate() {

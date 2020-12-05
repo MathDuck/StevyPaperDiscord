@@ -24,11 +24,14 @@ public class DiscordCommand implements MessageCreateListener {
                 event.deleteMessage();
 
                 Optional<ServerTextChannel> TextChannel = event.getChannel().asServerTextChannel();
+                Optional<User> User = event.getMessageAuthor().asUser();
                 if (TextChannel.isPresent()) {
-                    if (TextChannel.get().hasPermission((User) event.getMessageAuthor(), PermissionType.ADMINISTRATOR)) {
-                        Main.getDiscordManager().dispose();
-                        plugin.getLogger().info("Closing Connection to Discord...");
-                        Main.getDiscordManager().init();
+                    if (User.isPresent()) {
+                        if (TextChannel.get().hasPermission(User.get(), PermissionType.ADMINISTRATOR)) {
+                            Main.getDiscordManager().dispose();
+                            plugin.getLogger().info("Closing Connection to Discord...");
+                            Main.getDiscordManager().init();
+                        }
                     }
                 }
             }
