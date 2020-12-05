@@ -50,16 +50,13 @@ public class DiscordManager {
                 if (user != null) {
                     plugin.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
                     sendLogMessageToDiscord(user.getName() + " is ready!", true, Color.CYAN);
-                    return;
                 }
-                return;
             } else {
                 plugin.getLogger().warning("Discord Token is not configured in option file.");
             }
 
         } catch (Exception e) {
             plugin.getLogger().warning("Problem when loading Discord Bot => " + e.getMessage());
-            return;
         }
 
         //TODO
@@ -140,6 +137,7 @@ public class DiscordManager {
                     .setTitle("[" + Util.completeDate() + "]")
                     .setDescription(message)
                     .setColor(color);
+            
             channel.ifPresent(textChannel -> {
                 textChannel.sendMessage(embed);
             });
@@ -158,9 +156,7 @@ public class DiscordManager {
         String toSend = Main.getConfigManager().getDiscordToMCTemplateMessage().replaceAll("&", "\u00a7");
         toSend = toSend.replaceAll("%name%", name);
         toSend = toSend.replaceAll("%message%", message);
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage((BaseComponent) new TextComponent(toSend));
-        }
+        for (Player p : Bukkit.getOnlinePlayers()) p.sendMessage((BaseComponent) new TextComponent(toSend));
     }
 
     public void forceUpdate() {

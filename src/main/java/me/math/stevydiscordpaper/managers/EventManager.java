@@ -2,6 +2,7 @@ package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
 import me.math.stevydiscordpaper.managers.paper.listeners.PlayerJoinListener;
+import me.math.stevydiscordpaper.managers.paper.listeners.PlayerQuitListener;
 import org.bukkit.plugin.PluginManager;
 
 public class EventManager {
@@ -19,8 +20,8 @@ public class EventManager {
         PluginManager pm = plugin.getServer().getPluginManager();
 
         pm.registerEvents(new PlayerJoinListener(plugin), plugin);
-        /*pm.registerEvents(new PlayerQuitListener(this), this);
-        pm.registerEvents(new PlayerChatListener(this), this);
+        pm.registerEvents(new PlayerQuitListener(plugin), plugin);
+        /*pm.registerEvents(new PlayerChatListener(this), this);
         pm.registerEvents(new PlayerDeathListener(this), this);
         pm.registerEvents(new PlayerSendCommandListener(this), this);
 
