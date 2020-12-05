@@ -23,8 +23,5 @@ public class PlayerQuitListener implements Listener {
             Main.getDiscordManager().sendListenerMessageToDiscord(player, Main.getConfigManager().discordMessageOnUserLogoutMessage(), Color.GRAY);
 
         Main.getDiscordManager().forceUpdate();
-
-        //TODO Déplacer dans Utils
-        //event.setQuitMessage("Oh non §4§l" + player.getName() + " §rvient de partir ! En espérant le revoir bientôt !");
     }
 }

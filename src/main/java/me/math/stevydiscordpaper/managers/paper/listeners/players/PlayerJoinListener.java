@@ -23,11 +23,5 @@ public class PlayerJoinListener implements Listener {
             Main.getDiscordManager().sendListenerMessageToDiscord(player, Main.getConfigManager().discordMessageOnUserLoginMessage(), Color.CYAN);
 
         Main.getDiscordManager().forceUpdate();
-
-        //TODO Déplacer dans Utils
-        /*event.setJoinMessage("Hey §2§l" + player.getName() + " §rvient de se connecter! Bon jeu à toi!");
-
-        if (!Main.getConfigManager().isPvpEnabled())
-            player.sendMessage("§4§oLe PvP est actuellement désactivé.");*/
     }
 }

@@ -1,6 +1,7 @@
 package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
+import me.math.stevydiscordpaper.managers.discord.commands.DiscordCommand;
 import me.math.stevydiscordpaper.managers.discord.commands.PingCommand;
 import me.math.stevydiscordpaper.utils.EmojiData;
 import me.math.stevydiscordpaper.utils.Util;
@@ -40,10 +41,10 @@ public class DiscordManager {
                 api = new DiscordApiBuilder().setToken(discordToken).login().join();
 
                 api.addMessageCreateListener(new PingCommand(plugin));
+                api.addMessageCreateListener(new DiscordCommand(plugin));
                 /*api.addMessageCreateListener(new InfosCommand(this));
                 api.addMessageCreateListener(new OnlineCommand(this));
                 api.addMessageCreateListener(new TPSCommand(this));
-                api.addMessageCreateListener(new DiscordCommand(this));
                 api.addMessageCreateListener(new WhitelistCommand(this));
                 api.addMessageCreateListener(new DiscordMessageListener());*/
 
@@ -59,9 +60,6 @@ public class DiscordManager {
         } catch (Exception e) {
             plugin.getLogger().warning("Problem when loading Discord Bot => " + e.getMessage());
         }
-
-        //TODO
-        //sendLogMessageToDiscord("Le serveur (" + Main.getConfigManager().getServerHost() + ") est en ligne.", true, Color.GREEN);
     }
 
     public void sendListenerMessageToDiscord(Player player, String structure, Color color) {
@@ -195,8 +193,5 @@ public class DiscordManager {
         api.unsetActivity();
         api.disconnect();
         api = null;
-
-        //TODO
-        //sendLogMessageToDiscord("Le serveur est maintenant hors-ligne.", true, Color.RED);
     }
 }

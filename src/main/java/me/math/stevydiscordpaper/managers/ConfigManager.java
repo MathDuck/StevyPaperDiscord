@@ -57,7 +57,7 @@ public class ConfigManager {
                 config.set("use_embed_discord_message", true);
                 config.set("show_emojis_name", true);
                 config.set("debug_mode", false);
-                config.set("debug_mode", true);
+                config.set("discord_show_death_coordinates", true);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             } else {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
@@ -84,7 +84,7 @@ public class ConfigManager {
         useEmbedDiscordMessage = conf.getBoolean("use_embed_discord_message");
         showEmojisName = conf.getBoolean("show_emojis_name");
         isDebugging = conf.getBoolean("debug_mode");
-        showDeathCoordinatesOnDiscord = conf.getBoolean("show_death_coordinates_on_discord");
+        showDeathCoordinatesOnDiscord = conf.getBoolean("discord_show_death_coordinates");
     }
 
     public void saveConfigOnQuit() {
@@ -109,7 +109,7 @@ public class ConfigManager {
                 config.set("use_embed_discord_message", useEmbedDiscordMessage);
                 config.set("show_emojis_name", showEmojisName);
                 config.set("debug_mode", isDebugging);
-                config.set("show_death_coordinates_on_discord", showDeathCoordinatesOnDiscord);
+                config.set("discord_show_death_coordinates", showDeathCoordinatesOnDiscord);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             }
         } catch (IOException e) {
