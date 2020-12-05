@@ -1,8 +1,8 @@
 package me.math.stevydiscordpaper.managers;
 
 import me.math.stevydiscordpaper.Main;
-import me.math.stevydiscordpaper.managers.discord.commands.DiscordCommand;
-import me.math.stevydiscordpaper.managers.discord.commands.PingCommand;
+import me.math.stevydiscordpaper.managers.discord.commands.*;
+import me.math.stevydiscordpaper.managers.discord.listeners.DiscordMessageListener;
 import me.math.stevydiscordpaper.utils.EmojiData;
 import me.math.stevydiscordpaper.utils.Util;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -42,11 +42,11 @@ public class DiscordManager {
 
                 api.addMessageCreateListener(new PingCommand(plugin));
                 api.addMessageCreateListener(new DiscordCommand(plugin));
-                /*api.addMessageCreateListener(new InfosCommand(this));
-                api.addMessageCreateListener(new OnlineCommand(this));
-                api.addMessageCreateListener(new TPSCommand(this));
-                api.addMessageCreateListener(new WhitelistCommand(this));
-                api.addMessageCreateListener(new DiscordMessageListener());*/
+                api.addMessageCreateListener(new InfosCommand(plugin));
+                api.addMessageCreateListener(new OnlineCommand(plugin));
+                api.addMessageCreateListener(new TPSCommand(plugin));
+                api.addMessageCreateListener(new WhitelistCommand(plugin));
+                api.addMessageCreateListener(new DiscordMessageListener());
 
                 User user = api.getYourself();
                 if (user != null) {
