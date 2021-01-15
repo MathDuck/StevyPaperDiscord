@@ -84,7 +84,7 @@ public class DiscordManager {
                     .setTitle("[" + Util.completeDate() + "]")
                     .setDescription(toSend)
                     .setColor(color)
-                    .setThumbnail("https://minotar.net/avatar/" + player.getUniqueId().toString().replace("-", "") + "/60");
+                    .setThumbnail("https://crafatar.com/avatars/" + player.getUniqueId().toString().replace("-", "") + "?size=60");
 
             channel.ifPresent(textChannel -> {
                 textChannel.sendMessage(embed);
