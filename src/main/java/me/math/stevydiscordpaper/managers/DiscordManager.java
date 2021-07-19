@@ -6,7 +6,6 @@ import me.math.stevydiscordpaper.managers.discord.listeners.DiscordMessageListen
 import me.math.stevydiscordpaper.utils.EmojiData;
 import me.math.stevydiscordpaper.utils.TimeSpan;
 import me.math.stevydiscordpaper.utils.Util;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -86,13 +85,9 @@ public class DiscordManager {
                     .setColor(color)
                     .setThumbnail("https://crafatar.com/avatars/" + player.getUniqueId().toString().replace("-", "") + "?size=60");
 
-            channel.ifPresent(textChannel -> {
-                textChannel.sendMessage(embed);
-            });
+            channel.ifPresent(textChannel -> textChannel.sendMessage(embed));
         } else {
-            channel.ifPresent(textChannel -> {
-                textChannel.sendMessage("[" + Util.completeDate() + "] " + toSend);
-            });
+            channel.ifPresent(textChannel -> textChannel.sendMessage("[" + Util.completeDate() + "] " + toSend));
         }
     }
 
@@ -107,9 +102,7 @@ public class DiscordManager {
         toSend = toSend.replaceAll("%message%", message);
         String finalToSend = toSend;
 
-        channel.ifPresent(textChannel -> {
-            textChannel.sendMessage("*[" + Util.justClock() + "]*  " + finalToSend);
-        });
+        channel.ifPresent(textChannel -> textChannel.sendMessage("*[" + Util.justClock() + "]*  " + finalToSend));
     }
 
     public void sendCommandMessageToDiscord(String message) {
@@ -122,9 +115,7 @@ public class DiscordManager {
 
         Optional<TextChannel> channel = api.getTextChannelById(logChannelId);
 
-        channel.ifPresent(textChannel -> {
-            textChannel.sendMessage("```[" + Util.completeDate() + "] " + message + "```");
-        });
+        channel.ifPresent(textChannel -> textChannel.sendMessage("```[" + Util.completeDate() + "] " + message + "```"));
     }
 
     public void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
@@ -143,13 +134,9 @@ public class DiscordManager {
                     .setDescription(message)
                     .setColor(color);
 
-            channel.ifPresent(textChannel -> {
-                textChannel.sendMessage(embed);
-            });
+            channel.ifPresent(textChannel -> textChannel.sendMessage(embed));
         } else {
-            channel.ifPresent(textChannel -> {
-                textChannel.sendMessage("[" + Util.completeDate() + "] " + message);
-            });
+            channel.ifPresent(textChannel -> textChannel.sendMessage("[" + Util.completeDate() + "] " + message));
         }
     }
 
@@ -161,7 +148,7 @@ public class DiscordManager {
         String toSend = Main.getConfigManager().getDiscordToMCTemplateMessage().replaceAll("&", "\u00a7");
         toSend = toSend.replaceAll("%name%", name);
         toSend = toSend.replaceAll("%message%", message);
-        for (Player p : Bukkit.getOnlinePlayers()) p.sendMessage((BaseComponent) new TextComponent(toSend));
+        for (Player p : Bukkit.getOnlinePlayers()) p.sendMessage(new TextComponent(toSend));
     }
 
     private void startDiscordCycle() {

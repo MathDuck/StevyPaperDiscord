@@ -25,7 +25,7 @@ public final class Main extends JavaPlugin {
         eventManager.init();
         commandManager = new CommandManager(this);
         commandManager.init();
-        textManager = new TextManager(this);
+        textManager = new TextManager();
         textManager.init();
         discordManager = new DiscordManager(this);
         discordManager.init();
@@ -48,5 +48,13 @@ public final class Main extends JavaPlugin {
 
     public static TextManager getTextManager() {
         return textManager;
+    }
+
+    public static EventManager getEventManager() {
+        return eventManager;
+    }
+
+    public static CommandManager getCommandManagerManager() {
+        return commandManager;
     }
 }

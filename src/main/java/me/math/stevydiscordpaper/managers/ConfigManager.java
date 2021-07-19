@@ -17,7 +17,12 @@ public class ConfigManager {
     private long defaultChannelId, chatChannelId, logChannelId;
     private boolean logChannelEnabled, discordMessageOnUserLogin, discordMessageOnUserLogout, useEmbedDiscordMessage, isDebugging, showEmojisName;
 
+    //Death Coordinates On Discord
     private boolean showDeathCoordinatesOnDiscord;
+
+    //VOID Teleport
+    private boolean voidTeleportEnabled;
+    private int voidLowestPosition;
 
     public ConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -58,6 +63,8 @@ public class ConfigManager {
                 config.set("show_emojis_name", true);
                 config.set("debug_mode", false);
                 config.set("discord_show_death_coordinates", true);
+                config.set("void_teleport_enabled", true);
+                config.set("void_lowest_position", -5);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             } else {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
@@ -68,23 +75,25 @@ public class ConfigManager {
     }
 
     public void loadConfig(Configuration conf) {
-        serverHost = conf.getString("server_host");
-        discordToken = conf.getString("discord_token");
-        discordPrefix = conf.getString("discord_command_prefix");
-        defaultChannelId = conf.getLong("discord_default_channel");
-        chatChannelId = conf.getLong("discord_chatlogs_channel");
-        logChannelEnabled = conf.getBoolean("discord_logs_enabled");
-        logChannelId = conf.getLong("discord_logs_channel");
-        discordToMCTemplateMessage = conf.getString("discord_chat_to_minecraft_template_message");
-        MCToDiscordTemplateMessage = conf.getString("minecraft_chat_to_discord_template_message");
-        discordMessageOnUserLogin = conf.getBoolean("discord_bot_send_on_login");
-        discordMessageOnUserLoginMessage = conf.getString("discord_bot_send_on_login_message");
-        discordMessageOnUserLogout = conf.getBoolean("discord_bot_send_on_logout");
-        discordMessageOnUserLogoutMessage = conf.getString("discord_bot_send_on_logout_message");
-        useEmbedDiscordMessage = conf.getBoolean("use_embed_discord_message");
-        showEmojisName = conf.getBoolean("show_emojis_name");
-        isDebugging = conf.getBoolean("debug_mode");
-        showDeathCoordinatesOnDiscord = conf.getBoolean("discord_show_death_coordinates");
+        serverHost = conf.getString("server_host", "127.0.0.1");
+        discordToken = conf.getString("discord_token", "EMPTY");
+        discordPrefix = conf.getString("discord_command_prefix","!");
+        defaultChannelId = conf.getLong("discord_default_channel",0);
+        chatChannelId = conf.getLong("discord_chatlogs_channel", 0);
+        logChannelEnabled = conf.getBoolean("discord_logs_enabled", true);
+        logChannelId = conf.getLong("discord_logs_channel", 0);
+        discordToMCTemplateMessage = conf.getString("discord_chat_to_minecraft_template_message", "<%name%>: %message%");
+        MCToDiscordTemplateMessage = conf.getString("minecraft_chat_to_discord_template_message", "**<%name%>** %message%");
+        discordMessageOnUserLogin = conf.getBoolean("discord_bot_send_on_login", true);
+        discordMessageOnUserLoginMessage = conf.getString("discord_bot_send_on_login_message", "**%name% vient de se connecter**");
+        discordMessageOnUserLogout = conf.getBoolean("discord_bot_send_on_logout", true);
+        discordMessageOnUserLogoutMessage = conf.getString("discord_bot_send_on_logout_message", "**%name% vient de se déconnecter**");
+        useEmbedDiscordMessage = conf.getBoolean("use_embed_discord_message", true);
+        showEmojisName = conf.getBoolean("show_emojis_name", true);
+        isDebugging = conf.getBoolean("debug_mode", false);
+        showDeathCoordinatesOnDiscord = conf.getBoolean("discord_show_death_coordinates", true);
+        voidTeleportEnabled = conf.getBoolean("void_teleport_enabled", true);
+        voidLowestPosition = conf.getInt("void_lowest_position", -5);
     }
 
     public void saveConfigOnQuit() {
@@ -110,6 +119,8 @@ public class ConfigManager {
                 config.set("show_emojis_name", showEmojisName);
                 config.set("debug_mode", isDebugging);
                 config.set("discord_show_death_coordinates", showDeathCoordinatesOnDiscord);
+                config.set("void_teleport_enabled", voidTeleportEnabled);
+                config.set("void_lowest_position", voidLowestPosition);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             }
         } catch (IOException e) {
@@ -187,5 +198,13 @@ public class ConfigManager {
 
     public boolean isShowDeathLocationOnDiscordEnabled() {
         return showDeathCoordinatesOnDiscord;
+    }
+
+    public boolean isVoidTeleportEnabled() {
+        return voidTeleportEnabled;
+    }
+
+    public int getVoidLowestPosition() {
+        return voidLowestPosition;
     }
 }

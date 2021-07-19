@@ -1,15 +1,11 @@
 package me.math.stevydiscordpaper.managers;
 
-import me.math.stevydiscordpaper.Main;
-
 import java.util.HashMap;
 
 public class TextManager {
-    private final Main plugin;
     private final HashMap<String, String> locales;
 
-    public TextManager(Main plugin) {
-        this.plugin = plugin;
+    public TextManager() {
         this.locales = new HashMap<>();
     }
 
@@ -19,6 +15,7 @@ public class TextManager {
     }
 
     private void loadStrings() {
+        this.locales.put("advancement.advancementNotFound", "Progrès inconnu : %s");
         this.locales.put("advancements.adventure.adventuring_time.description", "Découvrez tous les biomes.");
         this.locales.put("advancements.adventure.adventuring_time.title", "Partons à l'aventure !");
         this.locales.put("advancements.adventure.arbalistic.description", "Tuez cinq créatures de types différents d'un tir d'arbalète.");
@@ -33,16 +30,24 @@ public class TextManager {
         this.locales.put("advancements.adventure.kill_a_mob.title", "Chasseur de monstres");
         this.locales.put("advancements.adventure.kill_all_mobs.description", "Tuez au moins une fois chaque créature hostile.");
         this.locales.put("advancements.adventure.kill_all_mobs.title", "Monstres chassés");
+        this.locales.put("advancements.adventure.lightning_rod_with_villager_no_fire.description", "Protégez un villageois d'une décharge électrique indésirable sans déclencher d'incendie.");
+        this.locales.put("advancements.adventure.lightning_rod_with_villager_no_fire.title", "Sous haute tension");
         this.locales.put("advancements.adventure.ol_betsy.description", "Tirez à l'arbalète.");
-        this.locales.put("advancements.adventure.ol_betsy.title", "Ma vieille Bertha");
+        this.locales.put("advancements.adventure.ol_betsy.title", "La vieille Bertha");
         this.locales.put("advancements.adventure.root.description", "Aventure, exploration et combat");
         this.locales.put("advancements.adventure.root.title", "Aventure");
         this.locales.put("advancements.adventure.shoot_arrow.description", "Tirez sur quelque chose avec une flèche.");
         this.locales.put("advancements.adventure.shoot_arrow.title", "Dans la ligne de mire");
         this.locales.put("advancements.adventure.sleep_in_bed.description", "Dormez dans un lit pour changer votre point de réapparition.");
-        this.locales.put("advancements.adventure.sleep_in_bed.title", "Faites de beaux rêves");
+        this.locales.put("advancements.adventure.sleep_in_bed.title", "Bonne nuit les petits");
         this.locales.put("advancements.adventure.sniper_duel.description", "Tuez un squelette à au moins 50 mètres de distance.");
         this.locales.put("advancements.adventure.sniper_duel.title", "Duel de snipers");
+        this.locales.put("advancements.adventure.spyglass_at_dragon.description", "Regardez l'Ender Dragon à travers une longue-vue.");
+        this.locales.put("advancements.adventure.spyglass_at_dragon.title", "Est-ce un avion ?");
+        this.locales.put("advancements.adventure.spyglass_at_ghast.description", "Regardez un Ghast à travers une longue-vue.");
+        this.locales.put("advancements.adventure.spyglass_at_ghast.title", "Est-ce une montgolfière ?");
+        this.locales.put("advancements.adventure.spyglass_at_parrot.description", "Regardez un perroquet à travers une longue-vue.");
+        this.locales.put("advancements.adventure.spyglass_at_parrot.title", "Est-ce un oiseau ?");
         this.locales.put("advancements.adventure.summon_iron_golem.description", "Invoquez un golem de fer pour défendre un village.");
         this.locales.put("advancements.adventure.summon_iron_golem.title", "Agent de sécurité");
         this.locales.put("advancements.adventure.throw_trident.description", "Lancez un trident sur quelque chose.\nRemarque : lancer votre seule arme n'est pas une bonne idée.");
@@ -55,8 +60,10 @@ public class TextManager {
         this.locales.put("advancements.adventure.two_birds_one_arrow.title", "D'une flèche deux coups");
         this.locales.put("advancements.adventure.very_very_frightening.description", "Frappez un villageois avec la foudre.");
         this.locales.put("advancements.adventure.very_very_frightening.title", "Coup de foudre");
-        this.locales.put("advancements.adventure.voluntary_exile.description", "Tuez un capitaine de pillards.\nEnvisagez peut-être de rester à l'écart des villages pour le moment...");
+        this.locales.put("advancements.adventure.voluntary_exile.description", "Tuez un capitaine de pillards.\nMieux vaut rester éloigné des villages pour le moment...");
         this.locales.put("advancements.adventure.voluntary_exile.title", "Exil volontaire");
+        this.locales.put("advancements.adventure.walk_on_powder_snow_with_leather_boots.description", "Marchez sur de la neige poudreuse... sans vous y enfoncer.");
+        this.locales.put("advancements.adventure.walk_on_powder_snow_with_leather_boots.title", "Léger comme un lapin");
         this.locales.put("advancements.adventure.whos_the_pillager_now.description", "Rendez à un pillard la monnaie de sa pièce.");
         this.locales.put("advancements.adventure.whos_the_pillager_now.title", "C'est qui le pillard maintenant ?");
         this.locales.put("advancements.empty", "Il semble qu'il n'y a pas grand-chose ici...");
@@ -78,6 +85,8 @@ public class TextManager {
         this.locales.put("advancements.end.respawn_dragon.title", "Un air de déjà vu...");
         this.locales.put("advancements.end.root.description", "Est-ce vraiment la fin ?");
         this.locales.put("advancements.end.root.title", "L'End");
+        this.locales.put("advancements.husbandry.axolotl_in_a_bucket.description", "Capturez un axolotl avec un seau.");
+        this.locales.put("advancements.husbandry.axolotl_in_a_bucket.title", "Le plus mignon des prédateurs");
         this.locales.put("advancements.husbandry.balanced_diet.description", "Mangez tout ce qui est comestible, même si ce n'est pas bon pour vous.");
         this.locales.put("advancements.husbandry.balanced_diet.title", "Une alimentation équilibrée");
         this.locales.put("advancements.husbandry.breed_all_animals.description", "Faites se reproduire au moins une fois chaque animal.");
@@ -88,10 +97,16 @@ public class TextManager {
         this.locales.put("advancements.husbandry.complete_catalogue.title", "Un chatalogue complet");
         this.locales.put("advancements.husbandry.fishy_business.description", "Pêchez un poisson.");
         this.locales.put("advancements.husbandry.fishy_business.title", "Merci pour le poisson");
+        this.locales.put("advancements.husbandry.kill_axolotl_target.description", "Faites équipe avec un axolotl et gagnez un combat.");
+        this.locales.put("advancements.husbandry.kill_axolotl_target.title", "L'union fait la force !");
+        this.locales.put("advancements.husbandry.make_a_sign_glow.description", "Faites briller le texte d'une pancarte.");
+        this.locales.put("advancements.husbandry.make_a_sign_glow.title", "Une idée brillante !");
         this.locales.put("advancements.husbandry.netherite_hoe.description", "Utilisez un lingot de Netherite pour améliorer une houe, puis réévaluez vos choix de vie.");
         this.locales.put("advancements.husbandry.netherite_hoe.title", "Sérieux dévouement");
-        this.locales.put("advancements.husbandry.plant_seed.description", "Plantez une graine et regardez-la grandir.");
+        this.locales.put("advancements.husbandry.plant_seed.description", "Plantez une graine et regardez-la pousser.");
         this.locales.put("advancements.husbandry.plant_seed.title", "Prends-en de la graine !");
+        this.locales.put("advancements.husbandry.ride_a_boat_with_a_goat.description", "Montez dans un bateau avec une chèvre.");
+        this.locales.put("advancements.husbandry.ride_a_boat_with_a_goat.title", "Flottage de chèvre");
         this.locales.put("advancements.husbandry.root.description", "Le monde est plein d'amis et de nourriture");
         this.locales.put("advancements.husbandry.root.title", "Agriculture");
         this.locales.put("advancements.husbandry.safely_harvest_honey.description", "Utilisez un feu de camp pour récolter avec une fiole le miel d'une ruche sans provoquer les abeilles.");
@@ -102,6 +117,10 @@ public class TextManager {
         this.locales.put("advancements.husbandry.tactical_fishing.title", "Pêche tactique");
         this.locales.put("advancements.husbandry.tame_an_animal.description", "Apprivoisez un animal.");
         this.locales.put("advancements.husbandry.tame_an_animal.title", "Meilleurs amis pour la vie");
+        this.locales.put("advancements.husbandry.wax_off.description", "Retirez la cire d'un bloc de cuivre !");
+        this.locales.put("advancements.husbandry.wax_off.title", "Frotter");
+        this.locales.put("advancements.husbandry.wax_on.description", "Cirez un bloc de cuivre avec un rayon de miel !");
+        this.locales.put("advancements.husbandry.wax_on.title", "Lustrer");
         this.locales.put("advancements.nether.all_effects.description", "Appliquez sur vous-même tous les effets en même temps.");
         this.locales.put("advancements.nether.all_effects.title", "Comment en est-on arrivé là ?");
         this.locales.put("advancements.nether.all_potions.description", "Appliquez sur vous-même tous les effets de potions en même temps.");
@@ -112,7 +131,7 @@ public class TextManager {
         this.locales.put("advancements.nether.charge_respawn_anchor.title", "Pas tout à fait \"neuf\" vies");
         this.locales.put("advancements.nether.create_beacon.description", "Construisez et placez une balise.");
         this.locales.put("advancements.nether.create_beacon.title", "Fais ta balise");
-        this.locales.put("advancements.nether.create_full_beacon.description", "Créez une balise complète.");
+        this.locales.put("advancements.nether.create_full_beacon.description", "Portez une balise à sa pleine puissance.");
         this.locales.put("advancements.nether.create_full_beacon.title", "Phare à On");
         this.locales.put("advancements.nether.distract_piglin.description", "Distrayez un Piglin avec de l'or.");
         this.locales.put("advancements.nether.distract_piglin.title", "Bling-bling");
@@ -125,7 +144,7 @@ public class TextManager {
         this.locales.put("advancements.nether.find_fortress.description", "Découvrez une forteresse du Nether.");
         this.locales.put("advancements.nether.find_fortress.title", "Une terrible forteresse");
         this.locales.put("advancements.nether.get_wither_skull.description", "Obtenez un crâne de Wither squelette.");
-        this.locales.put("advancements.nether.get_wither_skull.title", "Squelette fantasmagorique");
+        this.locales.put("advancements.nether.get_wither_skull.title", "Qu'on lui coupe la tête !");
         this.locales.put("advancements.nether.loot_bastion.description", "Pillez un coffre dans les vestiges d'un bastion.");
         this.locales.put("advancements.nether.loot_bastion.title", "De vraies têtes de cochon");
         this.locales.put("advancements.nether.netherite_armor.description", "Obtenez une armure complète en Netherite.");
@@ -160,13 +179,13 @@ public class TextManager {
         this.locales.put("advancements.story.enter_the_nether.description", "Construisez, allumez et entrez dans un portail du Nether.");
         this.locales.put("advancements.story.enter_the_nether.title", "Aller au fond des choses");
         this.locales.put("advancements.story.follow_ender_eye.description", "Suivez un œil de l'Ender.");
-        this.locales.put("advancements.story.follow_ender_eye.title", "À suivre…");
+        this.locales.put("advancements.story.follow_ender_eye.title", "À suivre...");
         this.locales.put("advancements.story.form_obsidian.description", "Obtenez un bloc d'obsidienne.");
         this.locales.put("advancements.story.form_obsidian.title", "Ice Bucket Challenge");
         this.locales.put("advancements.story.iron_tools.description", "Fabriquez une pioche en fer.");
         this.locales.put("advancements.story.iron_tools.title", "Bonne pioche !");
         this.locales.put("advancements.story.lava_bucket.description", "Remplissez un seau de lave.");
-        this.locales.put("advancements.story.lava_bucket.title", "Ça brûle !");
+        this.locales.put("advancements.story.lava_bucket.title", "Chaud devant !");
         this.locales.put("advancements.story.mine_diamond.description", "Obtenez des diamants.");
         this.locales.put("advancements.story.mine_diamond.title", "Des diamants !");
         this.locales.put("advancements.story.mine_stone.description", "Minez de la roche avec votre nouvelle pioche.");
