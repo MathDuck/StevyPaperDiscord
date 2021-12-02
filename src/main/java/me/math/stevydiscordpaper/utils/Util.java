@@ -46,4 +46,13 @@ public class Util {
         cal.add(13, (int)seconds + 1);
         return cal.getTime();
     }
+
+    private static String getBossClock(Date date){
+        return new SimpleDateFormat("HH:mm", Locale.FRANCE).format(date);
+    }
+
+    public static String getHoursAndMinutes(long ticks) {
+        Date date = ticksToDate(ticks);
+        return getBossClock(date);
+    }
 }

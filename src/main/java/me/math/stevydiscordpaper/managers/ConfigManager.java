@@ -21,8 +21,14 @@ public class ConfigManager {
     private boolean showDeathCoordinatesOnDiscord;
 
     //VOID Teleport
-    private boolean voidTeleportEnabled;
+    private boolean voidTeleportToOverworld;
     private int voidLowestPosition;
+
+    //Head Drop
+    private boolean headDrop;
+
+    //Compass Clock
+    private boolean compassClockEnabled;
 
     public ConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -65,6 +71,8 @@ public class ConfigManager {
                 config.set("discord_show_death_coordinates", true);
                 config.set("void_teleport_enabled", true);
                 config.set("void_lowest_position", -5);
+                config.set("head_drop", true);
+                config.set("compass_clock_enabled", true);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             } else {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
@@ -92,8 +100,10 @@ public class ConfigManager {
         showEmojisName = conf.getBoolean("show_emojis_name", true);
         isDebugging = conf.getBoolean("debug_mode", false);
         showDeathCoordinatesOnDiscord = conf.getBoolean("discord_show_death_coordinates", true);
-        voidTeleportEnabled = conf.getBoolean("void_teleport_enabled", true);
+        voidTeleportToOverworld = conf.getBoolean("void_teleport_enabled", true);
         voidLowestPosition = conf.getInt("void_lowest_position", -5);
+        headDrop = conf.getBoolean("head_drop", true);
+        compassClockEnabled = conf.getBoolean("compass_clock_enabled", true);
     }
 
     public void saveConfigOnQuit() {
@@ -119,8 +129,10 @@ public class ConfigManager {
                 config.set("show_emojis_name", showEmojisName);
                 config.set("debug_mode", isDebugging);
                 config.set("discord_show_death_coordinates", showDeathCoordinatesOnDiscord);
-                config.set("void_teleport_enabled", voidTeleportEnabled);
+                config.set("void_teleport_enabled", voidTeleportToOverworld);
                 config.set("void_lowest_position", voidLowestPosition);
+                config.set("head_drop", headDrop);
+                config.set("compass_clock_enabled", compassClockEnabled);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             }
         } catch (IOException e) {
@@ -201,10 +213,18 @@ public class ConfigManager {
     }
 
     public boolean isVoidTeleportEnabled() {
-        return voidTeleportEnabled;
+        return voidTeleportToOverworld;
     }
 
     public int getVoidLowestPosition() {
         return voidLowestPosition;
+    }
+
+    public boolean isHeadDropEnabled() {
+        return headDrop;
+    }
+
+    public boolean isCompassClockEnabled() {
+        return compassClockEnabled;
     }
 }

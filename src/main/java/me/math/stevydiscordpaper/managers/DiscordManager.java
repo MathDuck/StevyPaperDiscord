@@ -6,7 +6,8 @@ import me.math.stevydiscordpaper.managers.discord.listeners.DiscordMessageListen
 import me.math.stevydiscordpaper.utils.EmojiData;
 import me.math.stevydiscordpaper.utils.TimeSpan;
 import me.math.stevydiscordpaper.utils.Util;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.javacord.api.DiscordApi;
@@ -16,7 +17,6 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
 
-import java.awt.*;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,8 +53,10 @@ public class DiscordManager {
                 User user = api.getYourself();
                 if (user != null) {
                     plugin.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
-                    sendLogMessageToDiscord(user.getName() + " is ready!", true, Color.CYAN);
+                    sendLogMessageToDiscord(user.getName() + " is ready!", true, java.awt.Color.CYAN);
                 }
+
+                api.setReconnectDelay(attempt -> attempt * 2);
 
                 startDiscordCycle();
 
@@ -67,7 +69,7 @@ public class DiscordManager {
         }
     }
 
-    public void sendListenerMessageToDiscord(Player player, String structure, Color color) {
+    public void sendListenerMessageToDiscord(Player player, String structure, java.awt.Color color) {
         if (!isTokenHere)
             return;
 
@@ -118,7 +120,7 @@ public class DiscordManager {
         channel.ifPresent(textChannel -> textChannel.sendMessage("```[" + Util.completeDate() + "] " + message + "```"));
     }
 
-    public void sendLogMessageToDiscord(String message, boolean useEmbed, Color color) {
+    public void sendLogMessageToDiscord(String message, boolean useEmbed, java.awt.Color color) {
         if (!isTokenHere)
             return;
 
@@ -148,7 +150,10 @@ public class DiscordManager {
         String toSend = Main.getConfigManager().getDiscordToMCTemplateMessage().replaceAll("&", "\u00a7");
         toSend = toSend.replaceAll("%name%", name);
         toSend = toSend.replaceAll("%message%", message);
-        for (Player p : Bukkit.getOnlinePlayers()) p.sendMessage(new TextComponent(toSend));
+        final TextComponent txtComponent = Component.text()
+                .content(toSend)
+                .build();
+        Bukkit.broadcast(txtComponent);
     }
 
     private void startDiscordCycle() {
@@ -162,7 +167,7 @@ public class DiscordManager {
                 updateDiscordInfos();
                 TimeSpan span = new TimeSpan(start, System.currentTimeMillis());
                 if (span.toMilliseconds() > 2000) {
-                    plugin.getLogger().warning("Processing took: " + span.toMilliseconds() + "ms to execute.");
+                    plugin.getLogger().warning("DiscordManager => Processing took: " + span.toMilliseconds() + "ms to execute.");
                 }
             }
         }, delay, period);
