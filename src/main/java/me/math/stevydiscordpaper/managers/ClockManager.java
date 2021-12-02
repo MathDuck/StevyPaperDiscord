@@ -13,18 +13,18 @@ import org.bukkit.entity.Player;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CompassManager {
+public class ClockManager {
 
     private Main main;
     private BossBar bossBar;
 
-    public CompassManager(Main plugin) {
+    public ClockManager(Main plugin) {
         this.main = plugin;
         this.bossBar = Bukkit.createBossBar("title", BarColor.WHITE, BarStyle.SOLID);
     }
 
     public void init() {
-        if (!Main.getConfigManager().isCompassClockEnabled())
+        if (!Main.getConfigManager().isClockEnabled())
             return;
 
         startTimerCycle();
@@ -43,7 +43,7 @@ public class CompassManager {
                 }
                 TimeSpan span = new TimeSpan(start, System.currentTimeMillis());
                 if (span.toMilliseconds() > 2000) {
-                    Bukkit.getLogger().warning("CompassManager => Processing took: " + span.toMilliseconds() + "ms to execute.");
+                    Bukkit.getLogger().warning("ClockManager => Processing took: " + span.toMilliseconds() + "ms to execute.");
                 }
             }
         }, delay, period);

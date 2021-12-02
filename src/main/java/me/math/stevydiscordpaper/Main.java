@@ -10,7 +10,7 @@ public final class Main extends JavaPlugin {
     private static DiscordManager discordManager;
     private static EventManager eventManager;
     private static CommandManager commandManager;
-    private static CompassManager compassManager;
+    private static ClockManager clockManager;
 
     public static ConfigManager getConfigManager() {
         return configManager;
@@ -28,8 +28,12 @@ public final class Main extends JavaPlugin {
         return eventManager;
     }
 
-    public static CommandManager getCommandManagerManager() {
+    public static CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    public static ClockManager getClockManager() {
+        return clockManager;
     }
 
     @Override
@@ -50,8 +54,8 @@ public final class Main extends JavaPlugin {
         textManager.init();
         discordManager = new DiscordManager(this);
         discordManager.init();
-        compassManager = new CompassManager(this);
-        compassManager.init();
+        clockManager = new ClockManager(this);
+        clockManager.init();
     }
 
     @Override
@@ -59,6 +63,6 @@ public final class Main extends JavaPlugin {
         configManager.dispose();
         textManager.dispose();
         discordManager.dispose();
-        compassManager.dispose();
+        clockManager.dispose();
     }
 }

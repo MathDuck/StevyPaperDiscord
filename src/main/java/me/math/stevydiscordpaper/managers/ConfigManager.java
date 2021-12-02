@@ -224,7 +224,7 @@ public class ConfigManager {
         return headDrop;
     }
 
-    public boolean isCompassClockEnabled() {
+    public boolean isClockEnabled() {
         return compassClockEnabled;
     }
 }
