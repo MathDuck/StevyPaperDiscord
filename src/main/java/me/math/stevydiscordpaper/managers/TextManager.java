@@ -22,6 +22,8 @@ public class TextManager {
         this.locales.put("advancements.adventure.arbalistic.title", "Arbalistique");
         this.locales.put("advancements.adventure.bullseye.description", "Touchez le centre d'une cible à au moins 30 mètres de distance.");
         this.locales.put("advancements.adventure.bullseye.title", "Dans le mille !");
+        this.locales.put("advancements.adventure.fall_from_world_height.description", "Survivez à une chute du point le plus haut du monde (à la limite de construction) au point le plus bas.");
+        this.locales.put("advancements.adventure.fall_from_world_height.title", "Tombé du ciel");
         this.locales.put("advancements.adventure.hero_of_the_village.description", "Protégez un village d'une invasion.");
         this.locales.put("advancements.adventure.hero_of_the_village.title", "Héros du village");
         this.locales.put("advancements.adventure.honey_block_slide.description", "Sautez contre un bloc de miel pour ralentir votre chute.");
@@ -34,6 +36,8 @@ public class TextManager {
         this.locales.put("advancements.adventure.lightning_rod_with_villager_no_fire.title", "Sous haute tension");
         this.locales.put("advancements.adventure.ol_betsy.description", "Tirez à l'arbalète.");
         this.locales.put("advancements.adventure.ol_betsy.title", "La vieille Bertha");
+        this.locales.put("advancements.adventure.play_jukebox_in_meadows.description", "Donnez vie aux prairies avec la mélodie d'un jukebox.");
+        this.locales.put("advancements.adventure.play_jukebox_in_meadows.title", "La Mélodie du bonheur");
         this.locales.put("advancements.adventure.root.description", "Aventure, exploration et combat");
         this.locales.put("advancements.adventure.root.title", "Aventure");
         this.locales.put("advancements.adventure.shoot_arrow.description", "Tirez sur quelque chose avec une flèche.");
@@ -56,6 +60,8 @@ public class TextManager {
         this.locales.put("advancements.adventure.totem_of_undying.title", "Aux frontières de la mort");
         this.locales.put("advancements.adventure.trade.description", "Commercez avec un villageois.");
         this.locales.put("advancements.adventure.trade.title", "Adjugé, vendu !");
+        this.locales.put("advancements.adventure.trade_at_world_height.description", "Commercez avec un villageois à la hauteur maximale de construction.");
+        this.locales.put("advancements.adventure.trade_at_world_height.title", "Un commerce à la hauteur");
         this.locales.put("advancements.adventure.two_birds_one_arrow.description", "Tuez deux Phantoms avec une flèche perforante.");
         this.locales.put("advancements.adventure.two_birds_one_arrow.title", "D'une flèche deux coups");
         this.locales.put("advancements.adventure.very_very_frightening.description", "Frappez un villageois avec la foudre.");
@@ -76,7 +82,7 @@ public class TextManager {
         this.locales.put("advancements.end.enter_end_gateway.description", "Échappez-vous de l'île.");
         this.locales.put("advancements.end.enter_end_gateway.title", "Escapade à distance");
         this.locales.put("advancements.end.find_end_city.description", "Allez-y, que pourrait-il vous arriver ?");
-        this.locales.put("advancements.end.find_end_city.title", "La cité du bout du monde");
+        this.locales.put("advancements.end.find_end_city.title", "Les Mystérieuses Cités de l'End");
         this.locales.put("advancements.end.kill_dragon.description", "Tuez le dragon. Bonne chance !");
         this.locales.put("advancements.end.kill_dragon.title", "Libérez l'End !");
         this.locales.put("advancements.end.levitate.description", "Lévitez à 50 blocs de hauteur après l'attaque d'un Shulker.");
@@ -159,6 +165,8 @@ public class TextManager {
         this.locales.put("advancements.nether.return_to_sender.title", "Retour à l'envoyeur");
         this.locales.put("advancements.nether.ride_strider.description", "Chevauchez et dirigez un arpenteur avec un champignon biscornu sur un bâton.");
         this.locales.put("advancements.nether.ride_strider.title", "Bateau sur pattes");
+        this.locales.put("advancements.nether.ride_strider_in_overworld_lava.description", "Emmenez un arpenteur faire une loooongue balade sur un lac de lave de la Surface.");
+        this.locales.put("advancements.nether.ride_strider_in_overworld_lava.title", "Comme chez soi");
         this.locales.put("advancements.nether.root.description", "Bienvenue en enfer");
         this.locales.put("advancements.nether.root.title", "Nether");
         this.locales.put("advancements.nether.summon_wither.description", "Invoquez le Wither.");
@@ -167,7 +175,6 @@ public class TextManager {
         this.locales.put("advancements.nether.uneasy_alliance.title", "Alliance instable");
         this.locales.put("advancements.nether.use_lodestone.description", "Utilisez une boussole sur un bloc de magnétite.");
         this.locales.put("advancements.nether.use_lodestone.title", "Le Petit Poucet");
-        this.locales.put("advancements.sad_label", ":(");
         this.locales.put("advancements.story.cure_zombie_villager.description", "Affaiblissez et soignez un zombie-villageois.");
         this.locales.put("advancements.story.cure_zombie_villager.title", "Zombiologue");
         this.locales.put("advancements.story.deflect_arrow.description", "Parez un projectile avec un bouclier.");
