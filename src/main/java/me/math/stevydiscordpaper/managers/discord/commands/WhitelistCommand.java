@@ -65,7 +65,7 @@ public class WhitelistCommand implements MessageCreateListener {
                         StringBuilder text = new StringBuilder();
                         if (Bukkit.getWhitelistedPlayers().size() > 0) {
                             for (OfflinePlayer player : Bukkit.getWhitelistedPlayers()) {
-                                text.append("> - ").append(player.getName()).append("\n");
+                                text.append("> - `").append(player.getName()).append("`\n");
                             }
                         } else
                             text.append("Aucun whitelisté.");

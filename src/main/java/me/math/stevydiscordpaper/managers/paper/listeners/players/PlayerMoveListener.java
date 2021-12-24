@@ -10,8 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerMoveListener implements Listener {
+    private Main main;
 
-    public PlayerMoveListener() { }
+    public PlayerMoveListener(Main plugin) {
+        this.main = plugin;
+    }
 
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
