@@ -27,7 +27,7 @@ public class PlayerAdvancementDoneListener implements Listener {
             return;
 
         if (sanitizedName.contains("root"))
-            Main.getDiscordManager().sendListenerMessageToDiscord(player, "**%name%** a débloqué l'onglet **[" + advancementTitle + "]**.\n*(" + advancementDescription + ")*", Color.CYAN);
+            Main.getDiscordManager().sendListenerMessageToDiscord(player, "**%name%** a débloqué l'onglet **[" + advancementTitle + "]**.\n*(" + advancementDescription + ")*", Color.MAGENTA);
         else
             Main.getDiscordManager().sendListenerMessageToDiscord(player, "**%name%** a réalisé le progrès **[" + advancementTitle + "]**.\n*(" + advancementDescription + ")*", Color.GREEN);
     }
