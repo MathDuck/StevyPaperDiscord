@@ -27,9 +27,6 @@ public class ConfigManager {
     //Head Drop
     private boolean headDrop;
 
-    //Compass Clock
-    private boolean compassClockEnabled;
-
     public ConfigManager(Main plugin) {
         this.plugin = plugin;
     }
@@ -72,7 +69,6 @@ public class ConfigManager {
                 config.set("void_teleport_enabled", true);
                 config.set("void_lowest_position", -5);
                 config.set("head_drop", true);
-                config.set("compass_clock_enabled", true);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             } else {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
@@ -103,7 +99,6 @@ public class ConfigManager {
         voidTeleportToOverworld = conf.getBoolean("void_teleport_enabled", true);
         voidLowestPosition = conf.getInt("void_lowest_position", -5);
         headDrop = conf.getBoolean("head_drop", true);
-        compassClockEnabled = conf.getBoolean("compass_clock_enabled", true);
     }
 
     public void saveConfigOnQuit() {
@@ -132,7 +127,6 @@ public class ConfigManager {
                 config.set("void_teleport_enabled", voidTeleportToOverworld);
                 config.set("void_lowest_position", voidLowestPosition);
                 config.set("head_drop", headDrop);
-                config.set("compass_clock_enabled", compassClockEnabled);
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, file);
             }
         } catch (IOException e) {
@@ -222,9 +216,5 @@ public class ConfigManager {
 
     public boolean isHeadDropEnabled() {
         return headDrop;
-    }
-
-    public boolean isClockEnabled() {
-        return compassClockEnabled;
     }
 }

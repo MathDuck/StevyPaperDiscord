@@ -6,12 +6,12 @@
 
     <groupId>me.math.StevyDiscordPaper</groupId>
     <artifactId>StevyDiscordPaper</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>StevyDiscordPaper for 1.18</name>
+    <name>StevyDiscordPaper</name>
 
-    <description>Version Standalone de mon bot discord pour MC en 1.18</description>
+    <description>Version Standalone de mon bot discord pour MC</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -109,18 +109,18 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-config</artifactId>
-            <version>1.18-R0.1-SNAPSHOT</version>
+            <version>1.17-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-api</artifactId>
-            <version>4.9.3</version>
+            <version>4.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.javacord</groupId>
