@@ -42,6 +42,8 @@ public class DiscordManager {
             if (isTokenHere) {
                 api = new DiscordApiBuilder().setToken(discordToken).login().join();
 
+                api.setMessageCacheSize(120, 60*60);
+
                 api.addMessageCreateListener(new PingCommand(plugin));
                 api.addMessageCreateListener(new DiscordCommand(plugin));
                 api.addMessageCreateListener(new InfosCommand(plugin));
