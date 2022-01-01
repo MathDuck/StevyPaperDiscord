@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.awt.*;
+
 public class PlayerMoveListener implements Listener {
     private Main main;
 
@@ -34,6 +36,8 @@ public class PlayerMoveListener implements Listener {
                     playerLocation.setPitch(playerLocation.getYaw());
 
                     player.teleport(playerLocation);
+
+                    Main.getDiscordManager().sendLogMessageToDiscord(player.getName() + " vient de tomber de l'End jusqu'au spawn.", true, Color.PINK);
                 }
             }
         }

@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.awt.*;
 import java.util.UUID;
 
 public class PlayerDeathListener implements Listener {
@@ -54,7 +55,7 @@ public class PlayerDeathListener implements Listener {
             builder.append("x: ").append(location.getBlockX()).append(" / y: ").append(location.getBlockY()).append(" / z: ").append(location.getBlockZ()).append("\n");
             builder.append("Date de la mort: ").append(Util.completeDate());
 
-            Main.getDiscordManager().sendLogMessageToDiscord(player.getName() + " est mort. " + builder.toString(), true, java.awt.Color.ORANGE);
+            Main.getDiscordManager().sendLogMessageToDiscord(player.getName() + " est mort. " + builder.toString(), true, java.awt.Color.PINK);
         }
 
         if (Main.getConfigManager().isHeadDropEnabled()) {
@@ -68,6 +69,8 @@ public class PlayerDeathListener implements Listener {
                     UUID uuid = player.getUniqueId();
                     skull.setOwningPlayer(Bukkit.getServer().getOfflinePlayer(uuid));
                     skull.update();
+
+                    Main.getDiscordManager().sendLogMessageToDiscord("La tête de " + player.getName() + " vient de drop à sa mort.", true, Color.PINK);
                 };
 
                 BukkitScheduler scheduler = Bukkit.getScheduler();

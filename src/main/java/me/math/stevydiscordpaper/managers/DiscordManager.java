@@ -55,7 +55,7 @@ public class DiscordManager {
                 User user = api.getYourself();
                 if (user != null) {
                     plugin.getLogger().info("Connected on bot => " + user.getDiscriminatedName());
-                    sendLogMessageToDiscord(user.getName() + " is ready!", true, java.awt.Color.CYAN);
+                    sendLogMessageToDiscord(user.getName() + " is ready!", true, java.awt.Color.PINK);
                 }
 
                 api.setReconnectDelay(attempt -> attempt * 2);
