@@ -23,6 +23,7 @@ public class EventManager {
         pm.registerEvents(new PlayerChatListener(plugin), plugin);
         pm.registerEvents(new PlayerDeathListener(plugin), plugin);
         pm.registerEvents(new PlayerSendCommandListener(plugin), plugin);
+        pm.registerEvents(new PlayerMoveListener(plugin), plugin);
 
         pm.registerEvents(new PlayerAdvancementDoneListener(plugin), plugin);
     }
